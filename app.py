@@ -3,9 +3,10 @@ import numpy as np
 from flask import Flask, request, jsonify
 import joblib
 from sklearn.preprocessing import StandardScaler, LabelEncoder
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 # Load the trained model and preprocessing objects
 model = joblib.load('LR_Model.joblib')
 label_enc = LabelEncoder()
