@@ -40,17 +40,17 @@ def predict_sleep_disorder():
         # Retrieve input data from the JSON request
         data = request.get_json()
 
-        age = float(data['Age'])
-        sleep_duration = float(data['Sleep Duration'])
-        quality_of_sleep = float(data['Quality of Sleep'])
-        physical_activity_level = float(data['Physical Activity Level'])
-        stress_level = float(data['Stress Level'])
-        heart_rate = float(data['Heart Rate'])
-        daily_steps = float(data['Daily Steps'])
-        gender = data['Gender']
-        occupation = data['Occupation']
-        bmi_category = data['BMI Category']
-        blood_pressure = data['Blood Pressure']
+        age = float(data['age'])
+        sleep_duration = float(data['sleep_duration'])
+        quality_of_sleep = float(data['quality_of_sleep'])
+        physical_activity_level = float(data['physical_activity_level'])
+        stress_level = float(data['stress_level'])
+        heart_rate = float(data['heart_rate'])
+        daily_steps = float(data['daily_steps'])
+        gender = data['gender']
+        occupation = data['occupation']
+        bmi_category = data['bmi_category']
+        blood_pressure = data['blood_pressure']
         
         # Preprocess input data
         processed_data = preprocess_input(age, sleep_duration, quality_of_sleep, physical_activity_level,
