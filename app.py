@@ -7,6 +7,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+
 # Load the trained model and preprocessing objects
 model = joblib.load('LR_Model.joblib')
 label_enc = LabelEncoder()
@@ -36,23 +37,25 @@ def preprocess_input(age, sleep_duration, quality_of_sleep, physical_activity_le
 @app.route('/predict_sleep_disorder', methods=['POST'])
 def predict_sleep_disorder():
     try:
-        # Retrieve input data from the request
-        age = float(request.form['Age'])
-        sleep_duration = float(request.form['Sleep Duration'])
-        quality_of_sleep = float(request.form['Quality of Sleep'])
-        physical_activity_level = float(request.form['Physical Activity Level'])
-        stress_level = float(request.form['Stress Level'])
-        heart_rate = float(request.form['Heart Rate'])
-        daily_steps = float(request.form['Daily Steps'])
-        gender = request.form['Gender']
-        occupation = request.form['Occupation']
-        bmi_category = request.form['BMI Category']
-        blood_pressure = request.form['Blood Pressure']
+        # Retrieve input data from the JSON request
+        data = request.get_json()
+
+        age = float(data['Age'])
+        sleep_duration = float(data['Sleep Duration'])
+        quality_of_sleep = float(data['Quality of Sleep'])
+        physical_activity_level = float(data['Physical Activity Level'])
+        stress_level = float(data['Stress Level'])
+        heart_rate = float(data['Heart Rate'])
+        daily_steps = float(data['Daily Steps'])
+        gender = data['Gender']
+        occupation = data['Occupation']
+        bmi_category = data['BMI Category']
+        blood_pressure = data['Blood Pressure']
         
         # Preprocess input data
         processed_data = preprocess_input(age, sleep_duration, quality_of_sleep, physical_activity_level,
-                                         stress_level, heart_rate, daily_steps, gender, occupation,
-                                         bmi_category, blood_pressure)
+                                          stress_level, heart_rate, daily_steps, gender, occupation,
+                                          bmi_category, blood_pressure)
         
         print("Input Data (Scaled and Encoded):")
         print(processed_data)
